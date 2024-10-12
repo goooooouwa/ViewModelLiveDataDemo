@@ -19,11 +19,14 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         val tvCount = findViewById<TextView>(R.id.tvCount)
         val btnCount = findViewById<Button>(R.id.btnCount)
-        tvCount.text = viewModel.count.toString()
+        // tvCount.text = viewModel.count.toString()
+        viewModel.count.observe(this, {
+            tvCount.text = it.toString()
+        })
 
         btnCount.setOnClickListener {
             viewModel.updateCount()
-            tvCount.text = viewModel.count.toString()
+            // tvCount.text = viewModel.count.toString()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
